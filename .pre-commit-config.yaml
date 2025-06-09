@@ -1,0 +1,8 @@
+- repo: https://github.com/thoughtworks/talisman
+  rev: v1.16.0  # You can check the latest release on GitHub
+  hooks:
+    - id: talisman
+      name: Talisman - Detect Secrets
+      description: Detect secrets and sensitive information
+      language: system  # Talisman is not a Python-based hook
+      types: [text]
