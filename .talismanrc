@@ -1,0 +1,7 @@
+fileignoreconfig:
+- filename: .env
+  checksum: 872117772cdf449573e1568a192439dbac477bbc46950734c7b6f9a1f931d062
+- filename: script.py
+  checksum: 48a24456957e53c2d00b444d0e37ed4c74583aca3c7596606ac426d6c482a162
+- filename: config.json
+  checksum: 1330b33dc9b8d5b6c790fba359ba033d993007dfbf998e2917607b615e6bd17c
