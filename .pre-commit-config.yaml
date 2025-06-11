@@ -18,6 +18,7 @@ repos:
           # description: Detect secrets and sensitive information
           # language: system
           # exclude: ^\.env$
+          
 
 # .pre-commit-config.yaml
 # repos:
