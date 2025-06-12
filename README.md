@@ -1,6 +1,6 @@
 Refer - branch "test" for the config for pre-commit and if required you can clone it, install the hook and validate how the hook works.
 
-Refer - branch "autoinstall" - this branch has auto-install script already placed inside the .git/hooks repo. You can clone this repo and you don't even have to install it, you can directly using the pre-commit hook.
+Refer - branch "autoinstall" - this branch has auto-install script already placed inside the .git/hooks repo. You can clone this repo and you don't even have to install it, you can directly start using the pre-commit hook.
 ##################################################################
 
 
