@@ -15,7 +15,7 @@ jobs:
       GROUP: deepfence
       COMMIT: ${{ github.sha }}
       REPO: demo-app
-      DEEPFENCE_CONSOLE_URL: 35.207.199.73
+      DDEEPFENCE_CONSOLE_URL: http://35.207.199.73
       DEEPFENCE_KEY: ZGVmYXVsdDo3ODM4ZmZlYy0zMjNiLTRiODItOGY0OS1mZTVkOTE5YmIxZDg
       DEEPFENCE_LICENSE: ""
       DEEPFENCE_PRODUCT: ""
