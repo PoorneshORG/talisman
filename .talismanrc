@@ -1,0 +1,4 @@
+fileignoreconfig:
+- filename: script.py
+  checksum: c27c1463b460c75b620e9a609c2bd49a1416581fbf4edf8c80d0508073a5b262
+version: ""
