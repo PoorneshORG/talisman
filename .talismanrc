@@ -1,8 +1,0 @@
-# fileignoreconfig:
-# - filename: .github/workflows/ci.yml
-#   checksum: 07bd03d0bb3280e965f9ab27d5f599946eca0ab844f70504cded5d709f8b8b30
-# - filename: .gitattributes
-#   checksum: b945defe9342ba6d49818f5098743094692d8a1f6bd55a1d33c4f13d8c6be486
-# - filename: README.md
-#   checksum: 0b378aed4e133e4dad10c49efb2257034fec8d039326b96e2b2e8187005c7927
-# version: ""
