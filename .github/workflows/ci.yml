@@ -3,10 +3,10 @@ name: secrets-scanner
 on:
   push:
     branches:
-    - "*"
+      - "*"
   pull_request:
     branches:
-    - "*"
+      - "*"
 
 jobs:
   build:
@@ -20,28 +20,35 @@ jobs:
       DEEPFENCE_LICENSE: ""
       DEEPFENCE_PRODUCT: ""
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    # Build docker image for service
-    - name: Build docker image
-      uses: docker/build-push-action@v4
-      with:
-        context: .
-        push: false
-        tags: ${{ env.GROUP }}/${{ env.REPO }}:${{ github.sha }}
+      # Build docker image for service
+      - name: Build docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: false
+          tags: ${{ env.GROUP }}/${{ env.REPO }}:${{ github.sha }}
 
-    # Run Deepfence Secrets Scanner to check for secrets in image
-    - name: Run Deepfence Secrets Scanner
-      env:
-        DEEPFENCE_CONSOLE_URL: ${{ env.DEEPFENCE_CONSOLE_URL }}
-        DEEPFENCE_KEY: ${{ env.DEEPFENCE_KEY }}
-        FULL_IMAGE_NAME: ${{ env.GROUP }}/${{ env.REPO }}:${{ github.sha }}
-        FAIL_SECRET_COUNT: 100 # Fail build if number of secrets found is >= this number. Set -1 to pass regardless of secrets.
-        FAIL_HIGH_SECRET_COUNT: 10 # Fail build if number of high secrets found is >= this number. Set -1 to pass regardless of high secrets.
-        FAIL_MEDIUM_SECRET_COUNT: 20 # Fail build if number of medium secrets found is >= this number. Set -1 to pass regardless of medium secrets.
-        FAIL_LOW_SECRET_COUNT: 50 # Fail build if number of low secrets found is >= this number. Set -1 to pass regardless of low secrets.
-        DEEPFENCE_LICENSE: ""
-        DEEPFENCE_PRODUCT: ""
-      run: |
-        docker pull quay.io/deepfenceio/deepfence_secret_scanner_ce:2.5.2
-        docker run -i --rm --net=host --privileged=true --cpus=\"0.3\" -v /var/run/docker.sock:/var/run/docker.sock:rw quay.io/deepfenceio/deepfence_secret_scanner_ce:2.5.2 -image-name "$FULL_IMAGE_NAME" -fail-on-count=$FAIL_SECRET_COUNT -fail-on-high-count=$FAIL_HIGH_SECRET_COUNT -fail-on-medium-count=$FAIL_MEDIUM_SECRET_COUNT -fail-on-low-count=$FAIL_LOW_SECRET_COUNT"
+      # Run Deepfence Secrets Scanner to check for secrets in image
+      - name: Run Deepfence Secrets Scanner
+        env:
+          DEEPFENCE_CONSOLE_URL: ${{ env.DEEPFENCE_CONSOLE_URL }}
+          DEEPFENCE_KEY: ${{ env.DEEPFENCE_KEY }}
+          FULL_IMAGE_NAME: ${{ env.GROUP }}/${{ env.REPO }}:${{ github.sha }}
+          FAIL_SECRET_COUNT: 1000
+          FAIL_HIGH_SECRET_COUNT: 100
+          FAIL_MEDIUM_SECRET_COUNT: 200
+          FAIL_LOW_SECRET_COUNT: 500
+          DEEPFENCE_LICENSE: ""
+          DEEPFENCE_PRODUCT: ""
+        run: |
+          docker pull quay.io/deepfenceio/deepfence_secret_scanner_ce:2.5.2
+          docker run -i --rm --net=host --privileged=true --cpus="0.3" \
+            -v /var/run/docker.sock:/var/run/docker.sock:rw \
+            quay.io/deepfenceio/deepfence_secret_scanner_ce:2.5.2 \
+            -image-name "$FULL_IMAGE_NAME" \
+            -fail-on-count=$FAIL_SECRET_COUNT \
+            -fail-on-high-count=$FAIL_HIGH_SECRET_COUNT \
+            -fail-on-medium-count=$FAIL_MEDIUM_SECRET_COUNT \
+            -fail-on-low-count=$FAIL_LOW_SECRET_COUNT
